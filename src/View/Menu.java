@@ -20,7 +20,7 @@ public class Menu {
         this.sc = new Scanner(System.in);
         refereeController = new RefereeController();
         playerController = new PlayerController();
-        matchController = new MatchController();
+        matchController = new MatchController(new MatchRenderer());
     }
 
     public void crearMenu(){
@@ -42,12 +42,15 @@ public class Menu {
                     break;
                 case "3":
                     if(refereeController.getRefereeLogged())createPlayer();
+                    else System.out.println("Referee not logged");
                     break;
                 case "4":
                     if(refereeController.getRefereeLogged())readPlayers();
+                    else System.out.println("Referee not logged");
                     break;
                 case "5":
                     if(refereeController.getRefereeLogged())createMatch();
+                    else System.out.println("Referee not logged");
                     break;
                 default:
                     System.out.println("Programa finalizada");

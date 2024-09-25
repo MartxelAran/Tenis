@@ -2,12 +2,10 @@ package Model;
 
 public enum Points {
     ZERO(0),
-    FIFTEEN(15),
-    THIRTY(30),
-    FORTY(40),
-    DEUCE(-1),
-    ADVANTAGE(1),
-    WIN(2);
+    FIFTEEN(1),
+    THIRTY(2),
+    FORTY(3),
+    ADVANTAGE(4);
 
     private int value;
 
@@ -19,41 +17,25 @@ public enum Points {
         return value;
     }
 
-    private static final Points[] POINTS_VALUES = values();
-
-    public Points nextPoint(Points opponentScore) {
-        if (isDeuce(opponentScore)) {
-            return DEUCE;
+    public int getPoints() {
+        switch (this) {
+            case ZERO: return 0;
+            case FIFTEEN: return 15;
+            case THIRTY: return 30;
+            case FORTY: return 40;
+            case ADVANTAGE: return 50;
+            default: return 0;
         }
-        if (isAdvantage()) {
-            return ADVANTAGE;
-        }
-        if (isWin()) {
-            return WIN;
-        }
-
-        int ordinal = this.ordinal();
-        return POINTS_VALUES[Math.min(ordinal + 1, POINTS_VALUES.length - 1)];
     }
 
-    public boolean isDeuce(Points opponentScore){
-        if (this == FORTY && opponentScore == FORTY) {
-            return true;
+    public static Points getPoints(int value) {
+        switch (value) {
+            case 0: return ZERO;
+            case 1: return FIFTEEN;
+            case 2: return THIRTY;
+            case 3: return FORTY;
+            case 4: return ADVANTAGE;
+            default: return null;
         }
-        return false;
-    }
-
-    public boolean isAdvantage(){
-        if(this == DEUCE){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isWin(){
-        if (this == WIN) {
-            return true;
-        }
-        return false;
     }
 }
