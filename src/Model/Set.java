@@ -51,13 +51,7 @@ public class Set {
         return false;
     }
 
-    @Override
-    public String toString() {
-        String msg="";
-        for (Map.Entry<Player, Integer> entry : wonGamesByPlayers.entrySet())
-        {
-            msg+=entry.getKey().getName() + ": " + entry.getValue()+" - "+actualGame.getActualGamePointsByPlayer(entry.getKey())+"\n";
-        }
-        return msg;
+    public Game getActualGame(){
+        return actualGame;
     }
 }

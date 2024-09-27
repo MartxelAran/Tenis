@@ -96,7 +96,7 @@ public class Menu {
         ArrayList<Player> players=new ArrayList<>();
         System.out.println("Sets: ");
         int sets = sc.nextInt();
-        if(sets==3||sets==5){
+        if(sets==1||sets==3||sets==5){
             System.out.println("Ids: ");
             int playerToAdd = sc.nextInt();
             Player p = playerController.getPlayerById(playerToAdd);

@@ -29,8 +29,13 @@ public class Match{
     public void playerPoint(Player player){
         actualSet.playerPoint(player);
         if(actualSet.setFinished()){
-            newSet();
+            playerSet(player);
         }
+    }
+
+    public void playerSet(Player player){
+        wonSetsByPlayer.put(player, wonSetsByPlayer.get(player) + 1);
+        newSet();
     }
 
     public void newSet(){
@@ -42,18 +47,27 @@ public class Match{
     public boolean hasFinished(){
         for (Map.Entry<Player, Integer> entry : wonSetsByPlayer.entrySet()) {
             int sets = entry.getValue();
-            if (sets>(this.setNumber/2+1)){
+            if (sets>=(this.setNumber/2+1)){
                 return true;
             }
         }
         return false;
     }
 
-    @Override
-    public String toString() {
-        String msg= "id:" + id +
-                "\ndate:"+ java.time.Instant.ofEpochMilli(date)+
-                "\n"+sets.toString();
-        return  msg;
+    public ArrayList<Player> getPlayers(){
+        ArrayList<Player> players = new ArrayList<>(wonSetsByPlayer.keySet());
+        return players;
+    }
+
+    public ArrayList<Set> getSets(){
+        return sets;
+    }
+
+    public int getSetNumber(){
+        return setNumber;
+    }
+
+    public int getPointsByPlayer(Player player){
+        return actualSet.getActualGame().getActualGamePointsByPlayer(player);
     }
 }

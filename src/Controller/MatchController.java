@@ -23,12 +23,12 @@ public class MatchController {
         int reps=0;
         do{
             matchRenderer.showMatch(matches.get(matchId-1));
-            int idPlayer = matchGenerator.generatePointWinner();
-            System.out.println(idPlayer);
-            Player p= PlayerController.getPlayerById(idPlayer+1);
+            int idPointPlayer = matchGenerator.generatePointWinner();
+            Player p= PlayerController.getPlayerById(idPointPlayer+1);
             matches.get(matchId-1).playerPoint(p);
             reps++;
         }while(!actualMatch.hasFinished());
+        matchRenderer.showMatch(matches.get(matchId-1));
     }
 
     public int addMatch(int sets, ArrayList<Player> players) {
