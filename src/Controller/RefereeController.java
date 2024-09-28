@@ -23,11 +23,10 @@ public class RefereeController {
     }
 
     public boolean checkRefereeCredentials(String name, String password){
-        boolean isValid = referees.stream().anyMatch(ref ->
+        return referees.stream().anyMatch(ref ->
                 ref.getName().equals(name) &&
                         ref.getPassword().equals(password)
         );
-        return isValid;
     }
 
     public boolean getRefereeLogged(){

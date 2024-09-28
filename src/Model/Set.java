@@ -2,17 +2,16 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Set {
-    public ArrayList<Game> games;
+    public ArrayList<GameType> games;
     public Map<Player, Integer> wonGamesByPlayers;
-    public Game actualGame;
+    public GameType actualGame;
 
     public Set(ArrayList<Player> players){
         games = new ArrayList<>();
-        actualGame=new Game(players);
+        actualGame=new StandardGame(players);
         games.add(actualGame);
         wonGamesByPlayers = new HashMap<Player, Integer>();
         wonGamesByPlayers.put(players.get(0), 0);
@@ -37,8 +36,28 @@ public class Set {
 
     public void newGame(){
         ArrayList<Player> players = new ArrayList<>(wonGamesByPlayers.keySet());
-        actualGame=new Game(players);
+        if (isTieBreakCondition()) {
+            actualGame = new TieBreak(players);  // Crear TieBreakGame si se cumple la condición
+        } else {
+            actualGame = new StandardGame(players);  // Crear StandardGame en caso contrario
+        }
         games.add(actualGame);
+    }
+
+    private boolean isTieBreakCondition() {
+        int playersWithSixGames = 0;
+
+        for (Map.Entry<Player, Integer> entry : wonGamesByPlayers.entrySet()) {
+            int gamesWon = entry.getValue();
+            if (gamesWon == 6) {
+                playersWithSixGames++;
+            }
+            if (playersWithSixGames == 2) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public boolean setFinished(){
@@ -51,7 +70,7 @@ public class Set {
         return false;
     }
 
-    public Game getActualGame(){
+    public GameType getActualGame(){
         return actualGame;
     }
 }

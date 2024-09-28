@@ -10,42 +10,54 @@ import java.util.ArrayList;
 public class CreateMatchCommand implements MenuCommand{
 
     private final MatchController matchController;
-    private final PlayerController playerController;
+    private final ConsolePrint consolePrint;
 
-    public CreateMatchCommand(MatchController matchController, PlayerController playerController) {
+    public CreateMatchCommand(MatchController matchController) {
         this.matchController = matchController;
-        this.playerController = playerController;
+        this.consolePrint = ConsolePrint.getInstance();
+    }
+
+    @Override
+    public void showCommand() {
+        consolePrint.println("5. Create match");
     }
 
     @Override
     public void execute() {
-        ConsolePrint consolePrint = ConsolePrint.getInstance();
-        ArrayList<Player> players = new ArrayList<Player>();
+        ArrayList<Player> players = new ArrayList<>();
+
         consolePrint.println("Sets: ");
         int sets = consolePrint.nextInt();
-        consolePrint.nextLine(); // Clear buffer
-        if (sets == 1 || sets == 3 || sets == 5) {
-            consolePrint.println("Ids: ");
+        consolePrint.nextLine();
+
+        if (sets != 1 && sets != 3 && sets != 5) {
+            consolePrint.println("Error: Invalid number of sets. Must be 1, 3, or 5.");
+            return;
+        }
+
+        if (!addPlayers(consolePrint, players)) {
+            return;
+        }
+
+        int createdMatchId = matchController.addMatch(sets, players);
+        matchController.startMatch(createdMatchId);
+    }
+
+    private boolean addPlayers(ConsolePrint consolePrint, ArrayList<Player> players) {
+        for (int i = 0; i < 2; i++) {
+            consolePrint.print("Enter Player " + (i + 1) + " ID: ");
             int playerToAdd = consolePrint.nextInt();
             consolePrint.nextLine();
-            Player p = playerController.getPlayerById(playerToAdd);
+
+            Player p = PlayerController.getPlayerById(playerToAdd);
             if (p == null) {
-                consolePrint.println("Error: Player not found");
-            } else {
-                players.add(p);
-                playerToAdd = consolePrint.nextInt();
-                consolePrint.nextLine();
-                p = playerController.getPlayerById(playerToAdd);
-                if (p == null) {
-                    consolePrint.println("Error: Player not found");
-                } else {
-                    players.add(playerController.getPlayerById(playerToAdd));
-                    int createdMatchId = matchController.addMatch(sets, players);
-                    matchController.startMatch(createdMatchId);
-                }
+                consolePrint.println("Error: Player with ID " + playerToAdd + " not found.");
+                return false;
             }
-        } else {
-            consolePrint.println("Error: Invalid number of sets");
+
+            players.add(p);
         }
+
+        return true;
     }
 }

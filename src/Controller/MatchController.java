@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public class MatchController {
 
-    public ArrayList<Match> matches;
-    public MatchRenderer matchRenderer;
-    public MatchGenerator matchGenerator;
-    public Match actualMatch;
+    private final ArrayList<Match> matches;
+    private final MatchRenderer matchRenderer;
+    private final MatchGenerator matchGenerator;
+    private Match actualMatch;
 
     public MatchController(MatchRenderer matchRenderer) {
         matches = new ArrayList<>();
@@ -20,13 +20,16 @@ public class MatchController {
     }
 
     public void startMatch(int matchId) {
-        int reps=0;
         do{
-            matchRenderer.showMatch(matches.get(matchId-1));
-            int idPointPlayer = matchGenerator.generatePointWinner();
-            Player p= PlayerController.getPlayerById(idPointPlayer+1);
-            matches.get(matchId-1).playerPoint(p);
-            reps++;
+            try {
+                matchRenderer.showMatch(matches.get(matchId-1));
+                int idPointPlayer = matchGenerator.generatePointWinner(actualMatch.getPlayers());
+                Player p= PlayerController.getPlayerById(idPointPlayer);
+                matches.get(matchId-1).playerPoint(p);
+                //Thread.sleep(500);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }while(!actualMatch.hasFinished());
         matchRenderer.showMatch(matches.get(matchId-1));
     }

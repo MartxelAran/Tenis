@@ -1,15 +1,13 @@
 package Model;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Game{
-
+public abstract class GameType {
     public Map<Player, Integer> wonPointsByPlayers;
 
-    public Game(ArrayList<Player> players){
+    public GameType(ArrayList<Player> players){
         wonPointsByPlayers = new HashMap<>();
         wonPointsByPlayers.put(players.get(0),0);
         wonPointsByPlayers.put(players.get(1),0);
@@ -19,17 +17,16 @@ public class Game{
         wonPointsByPlayers.put(player,wonPointsByPlayers.get(player)+1);
     }
 
-    public boolean gameFinished() {
+    public Player getOpponent(Player player) {
         for (Map.Entry<Player, Integer> entry : wonPointsByPlayers.entrySet()) {
-            int points = entry.getValue();
-            if (points>3){
-                return true;
+            if (!entry.getKey().equals(player)) {
+                return entry.getKey();
             }
         }
-        return false;
+        return null;
     }
 
-    public int getActualGamePointsByPlayer(Player player){
-        return Points.getPoints(wonPointsByPlayers.get(player)).getPoints();
-    }
+    public abstract boolean gameFinished();
+
+    public abstract int getActualGamePointsByPlayer(Player player);
 }

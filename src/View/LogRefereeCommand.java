@@ -5,14 +5,20 @@ import util.ConsolePrint;
 
 class LogRefereeCommand implements MenuCommand {
     private final RefereeController refereeController;
+    private final ConsolePrint consolePrint;
 
     public LogRefereeCommand(RefereeController refereeController) {
         this.refereeController = refereeController;
+        this.consolePrint = ConsolePrint.getInstance();
+    }
+
+    @Override
+    public void showCommand() {
+        consolePrint.println("2. Login referee");
     }
 
     @Override
     public void execute() {
-        ConsolePrint consolePrint = ConsolePrint.getInstance();
         consolePrint.println("Ingrese un nombre");
         String nombre = consolePrint.nextLine();
         consolePrint.println("Ingrese un password");
