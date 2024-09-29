@@ -1,0 +1,26 @@
+@startuml
+skin rose
+
+package "tenis" {
+
+    package "Model" {
+    }
+
+    package "Controller" {
+    }
+
+    package "View" {
+     package "command" {
+        }
+    }
+
+    package "util" {
+    }
+}
+
+View ..> Controller : Use command
+View ..> util : Uses
+Controller ..> Model : Uses
+Model ..> util : Utilizes
+
+@enduml
