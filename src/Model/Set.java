@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Set {
-    private List<GameType> games;
+    private List<Game> games;
     private Map<Player, Integer> wonGamesByPlayers;
-    private GameType actualGame;
+    private Game actualGame;
     private ServeTurn serveTurn;
 
     public Set(List<Player> players, ServeTurn serveTurn){
@@ -75,7 +75,7 @@ public class Set {
         return false;
     }
 
-    public GameType getActualGame(){
+    public Game getActualGame(){
         return actualGame;
     }
 }

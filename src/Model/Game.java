@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class GameType {
+public abstract class Game {
     public Map<Player, Integer> wonPointsByPlayers;
     int pointsToWin;
     ServeTurn serveTurn;
 
-    protected GameType(List<Player> players, ServeTurn serveTurn) {
+    protected Game(List<Player> players, ServeTurn serveTurn) {
         wonPointsByPlayers = new HashMap<>();
         wonPointsByPlayers.put(players.get(0),0);
         wonPointsByPlayers.put(players.get(1),0);

@@ -2,7 +2,7 @@ package Model;
 
 import java.util.List;
 
-public class TieBreak extends GameType{
+public class TieBreak extends Game {
 
     public TieBreak(List<Player> players, ServeTurn serveTurn) {
         super(players, serveTurn);

@@ -24,7 +24,7 @@ class LogRefereeCommand implements MenuCommand {
         consolePrint.println("Ingrese un password");
         String password = consolePrint.nextLine();
         if (refereeController.checkRefereeCredentials(nombre, password)) {
-            System.out.println("Referee logged!");
+            consolePrint.println("Referee logged!");
             refereeController.setRefereeLogged(true);
         } else {
             consolePrint.println("Referee not logged!");

@@ -28,12 +28,11 @@ public class CreateMatchCommand implements MenuCommand {
 
     @Override
     public void execute() {
-        List<Player> players = new ArrayList<>();
-
         int sets = getNumberOfSets();
         if (sets == -1) return;
 
-        if (!collectPlayers(players)) {
+        List<Player> players = collectPlayers();
+        if (players.isEmpty()) {
             return;
         }
 
@@ -53,7 +52,8 @@ public class CreateMatchCommand implements MenuCommand {
         return sets;
     }
 
-    private boolean collectPlayers(List<Player> players) {
+    private List<Player> collectPlayers() {
+        List<Player> players = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
             consolePrint.print("Ingrese el ID del Jugador " + (i + 1) + ": ");
             int playerId = consolePrint.nextInt();
@@ -62,11 +62,11 @@ public class CreateMatchCommand implements MenuCommand {
             Optional<Player> playerOptional = playerController.getPlayerById(playerId);
             if (Boolean.FALSE.equals(playerOptional.isPresent())) {
                 consolePrint.println("Error: Jugador con ID " + playerId + " no encontrado.");
-                return false;
+                return new ArrayList<>();
             }else{
                 players.add(playerOptional.get());
             }
         }
-        return true;
+        return players;
     }
 }
