@@ -1,0 +1,38 @@
+@startuml
+
+class Match {}
+class Match3Set {}
+class Match5Set {}
+class Player {}
+class Game {}
+class Set {}
+class TieBreak extends Game {}
+class Point {}
+class Marker {}
+class Serve {}
+class Fault {}
+
+Match --down-> "2" Player
+
+Match <|-down- Match3Set
+Match <|-down- Match5Set
+
+Match3Set *-down-> "2..3" Set
+Match5Set *-down-> "3..5" Set
+
+Set *-down-> "6..12" Game
+Set *-down-> "0..1" TieBreak
+
+Game *-down-> "4..*" Point
+TieBreak *-down-> "6..*" Point
+
+
+Point --> Player
+Game ---> Marker
+
+
+Game *-down-> Serve
+Serve --> Fault
+Fault --> Point
+
+@enduml

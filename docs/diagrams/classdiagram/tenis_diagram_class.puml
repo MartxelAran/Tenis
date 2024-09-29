@@ -1,0 +1,182 @@
+@startuml
+
+class tenismatch.Model.Set {
+    + ArrayList<Game> games
+    + Map<Player,Integer> wonGamesByPlayers
+    + Game actualGame
+    + <<Create>> Set(ArrayList<Player>)
+    + Map<Player,Integer> getWonGamesByPlayers()
+    + void playerPoint(Player)
+    + void playerGame(Player)
+    + void newGame()
+    + boolean setFinished()
+    + Game getActualGame()
+}
+
+class tenismatch.Controller.RefereeController {
+    ~ ArrayList<Referee> referees
+    ~ boolean refereeLogged
+    + <<Create>> RefereeController()
+    + void addReferee(Referee)
+    + ArrayList<Referee> getReferees()
+    + boolean checkRefereeCredentials(String,String)
+    + boolean getRefereeLogged()
+    + void setRefereeLogged(boolean)
+}
+
+class tenismatch.View.CreatePlayerCommand {
+    - PlayerController playerController
+    + <<Create>> CreatePlayerCommand(PlayerController)
+}
+
+class tenismatch.Model.Player {
+    + int id
+    + String name
+    + <<Create>> Player(int,String)
+    + String getName()
+    + int getId()
+    + String toString()
+}
+
+class tenismatch.Controller.PlayerController {
+    ~ {static} ArrayList<Player> players
+    + <<Create>> PlayerController()
+    + void addPlayer(String)
+    + ArrayList<Player> getPlayers()
+    + Player getPlayerByName(String)
+    + {static} Player getPlayerById(int)
+}
+
+class tenismatch.View.LogRefereeCommand {
+    - RefereeController refereeController
+    + <<Create>> LogRefereeCommand(RefereeController)
+}
+
+interface tenismatch.View.MenuCommand {
+    ~ void execute()
+}
+
+class tenismatch.Controller.MatchController {
+    + ArrayList<Match> matches
+    + MatchRenderer matchRenderer
+    + MatchGenerator matchGenerator
+    + Match actualMatch
+    + <<Create>> MatchController(MatchRenderer)
+    + void startMatch(int)
+    + int addMatch(int,ArrayList<Player>)
+}
+
+class tenismatch.util.ConsolePrint {
+    - {static} ConsolePrint console
+    - Scanner scanner
+    - BufferedReader bufferedReader
+    - <<Create>> ConsolePrint()
+    + {static} ConsolePrint getInstance()
+    + String readString(String)
+    + int readInt(String)
+    + int nextInt()
+    + String nextLine()
+    + void println()
+    + void println(MessageConsole)
+    + void println(String)
+    + void print(String)
+    + void write(int)
+    + void write(String)
+    + void printError(String)
+    + void println(ArrayList<T>)
+}
+
+class tenismatch.View.ReadPlayersCommand {
+    - PlayerController playerController
+    + <<Create>> ReadPlayersCommand(PlayerController)
+}
+
+class tenismatch.View.MatchRenderer {
+    - Map<Player,Integer> wonGamesByPlayers
+    - ArrayList<Set> sets
+    - ArrayList<Player> players
+    + void showMatch(Match)
+    - void displayPlayerStats(Match,Player,int)
+}
+
+class tenismatch.Controller.MatchGenerator {
+    ~ Random rand
+    + <<Create>> MatchGenerator()
+    + int generatePointWinner()
+}
+
+class tenismatch.View.CreateMatchCommand {
+    - MatchController matchController
+    - PlayerController playerController
+    + <<Create>> CreateMatchCommand(MatchController,PlayerController)
+}
+
+class tenismatch.View.CreateRefereeCommand {
+    - RefereeController refereeController
+    + <<Create>> CreateRefereeCommand(RefereeController)
+}
+
+class tenismatch.Model.Match {
+    ~ int id
+    ~ ArrayList<Set> sets
+    ~ Map<Player,Integer> wonSetsByPlayer
+    ~ Set actualSet
+    ~ long date
+    ~ int setNumber
+    + <<Create>> Match(int,ArrayList<Player>,int)
+    + void playerPoint(Player)
+    + void playerSet(Player)
+    + void newSet()
+    + boolean hasFinished()
+    + ArrayList<Player> getPlayers()
+    + ArrayList<Set> getSets()
+    + int getSetNumber()
+    + int getPointsByPlayer(Player)
+}
+
+class tenismatch.Model.Referee {
+    + String name
+    + String password
+    + <<Create>> Referee(String,String)
+    + void logReferee()
+    + void registerReferee(String,String)
+    + String getName()
+    + void setName(String)
+    + String getPassword()
+    + void setPassword(String)
+}
+
+class tenismatch.Model.Game {
+    + Map<Player,Integer> wonPointsByPlayers
+    + <<Create>> Game(ArrayList<Player>)
+    + void playerPoint(Player)
+    + boolean gameFinished()
+    + int getActualGamePointsByPlayer(Player)
+}
+
+class tenismatch.View.Menu {
+    - Map<String,MenuCommand> commands
+    - RefereeController refereeController
+    - PlayerController playerController
+    - MatchController matchController
+    + <<Create>> Menu()
+    + void crearMenu()
+}
+
+tenismatch.Model.Set "1" -- "0..*" tenismatch.Model.Game : contiene >
+tenismatch.Model.Match "1" -- "0..*" tenismatch.Model.Set : contiene >
+tenismatch.Controller.MatchController "1" -- "0..*" tenismatch.Model.Match : gestiona >
+tenismatch.Controller.PlayerController "1" -- "0..*" tenismatch.Model.Player : gestiona >
+tenismatch.Controller.RefereeController "1" -- "0..*" tenismatch.Model.Referee : gestiona >
+tenismatch.View.MatchRenderer "1" -- "0..*" tenismatch.Model.Player : muestra >
+tenismatch.View.Menu "1" -- "1" tenismatch.Controller.RefereeController : usa >
+tenismatch.View.Menu "1" -- "1" tenismatch.Controller.PlayerController : usa >
+tenismatch.View.Menu "1" -- "1" tenismatch.Controller.MatchController : usa >
+
+tenismatch.View.MenuCommand <|.. tenismatch.View.CreatePlayerCommand
+tenismatch.View.MenuCommand <|.. tenismatch.View.LogRefereeCommand
+tenismatch.View.MenuCommand <|.. tenismatch.View.ReadPlayersCommand
+tenismatch.View.MenuCommand <|.. tenismatch.View.CreateMatchCommand
+tenismatch.View.MenuCommand <|.. tenismatch.View.CreateRefereeCommand
+
+@enduml
