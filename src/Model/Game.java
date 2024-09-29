@@ -13,6 +13,10 @@ public abstract class Game {
         wonPointsByPlayers.put(players.get(1),0);
     }
 
+    public abstract String getActualGamePointsByPlayer(Player player);
+
+    public abstract boolean shouldSwitchServer();
+
     public void playerPoint(Player player){
         wonPointsByPlayers.put(player,wonPointsByPlayers.get(player)+1);
     }
@@ -45,11 +49,8 @@ public abstract class Game {
         return false;
     }
 
-    public abstract boolean shouldSwitchServer();
-
     public void setPointsToWin(int pointsToWin) {
         this.pointsToWin = pointsToWin;
     }
 
-    public abstract String getActualGamePointsByPlayer(Player player);
 }

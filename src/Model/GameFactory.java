@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class GameFactory {
+public class GameFactory {
 
     public Game createGame(Map<Player, Integer> wonGamesByPlayers) {
         List<Player> players = new ArrayList<>(wonGamesByPlayers.keySet());
