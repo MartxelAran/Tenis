@@ -7,7 +7,6 @@ public class Match {
     private int id;
     private List<Set> sets;
     private Map<Player, Integer> wonSetsByPlayer;
-    private Set actualSet;
     private int setNumber;
     private ServeTurn serveTurn;
 
@@ -16,16 +15,15 @@ public class Match {
         this.sets = new ArrayList<>();
         this.wonSetsByPlayer = new HashMap<>();
         this.serveTurn = new ServeTurn(players);
-        this.actualSet = new Set(players, serveTurn);
-        this.sets.add(actualSet);
+        this.sets.add(new Set(players, serveTurn));
         this.wonSetsByPlayer.put(players.get(0), 0);
         this.wonSetsByPlayer.put(players.get(1), 0);
         this.setNumber = setNumber;
     }
 
     public void playerPoint(Player player) {
-        actualSet.playerPoint(player);
-        if (actualSet.setFinished()) {
+        getCurrentSet().playerPoint(player);
+        if (getCurrentSet().setFinished()) {
             playerSet(player);
         }
     }
@@ -37,8 +35,7 @@ public class Match {
 
     public void newSet() {
         List<Player> players = new ArrayList<>(wonSetsByPlayer.keySet());
-        actualSet = new Set(players, serveTurn);
-        sets.add(actualSet);
+        sets.add(new Set(players, serveTurn));
     }
 
     public boolean hasFinished() {
@@ -63,7 +60,7 @@ public class Match {
     }
 
     public String getPointsByPlayer(Player player) {
-        return actualSet.getActualGame().getActualGamePointsByPlayer(player);
+        return getCurrentSet().getActualGame().getActualGamePointsByPlayer(player);
     }
 
     public Player getServer() {
@@ -84,5 +81,9 @@ public class Match {
 
     public int getId() {
         return id;
+    }
+
+    private Set getCurrentSet() {
+        return sets.get(sets.size() - 1);
     }
 }

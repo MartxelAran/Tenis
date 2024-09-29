@@ -8,31 +8,29 @@ import java.util.Map;
 public class Set {
     private List<Game> games;
     private Map<Player, Integer> wonGamesByPlayers;
-    private Game actualGame;
     private ServeTurn serveTurn;
     private final GameFactory gameFactory;
 
     public Set(List<Player> players, ServeTurn serveTurn){
-        games = new ArrayList<>();
-        actualGame=new StandardGame(players);
-        this.serveTurn=serveTurn;
-        games.add(actualGame);
-        wonGamesByPlayers = new HashMap<>();
-        wonGamesByPlayers.put(players.get(0), 0);
-        wonGamesByPlayers.put(players.get(1), 0);
+        this.games = new ArrayList<>();
+        this.serveTurn = serveTurn;
+        this.wonGamesByPlayers = new HashMap<>();
+        this.wonGamesByPlayers.put(players.get(0), 0);
+        this.wonGamesByPlayers.put(players.get(1), 0);
         this.gameFactory = new GameFactory();
+        this.newGame();
     }
 
     public Map<Player, Integer> getWonGamesByPlayers(){
         return wonGamesByPlayers;
     }
 
-    public void playerPoint(Player player){
-        actualGame.playerPoint(player);
-        if(actualGame.shouldSwitchServer()){
+    public void playerPoint(Player player) {
+        getActualGame().playerPoint(player);
+        if (getActualGame().shouldSwitchServer()) {
             serveTurn.switchTurn();
         }
-        if(actualGame.gameFinished()){
+        if (getActualGame().gameFinished()) {
             playerGame(player);
         }
     }
@@ -44,8 +42,7 @@ public class Set {
 
     public void newGame(){
         Game gameCreate = gameFactory.createGame(wonGamesByPlayers);
-        actualGame = gameCreate;
-        games.add(actualGame);
+        games.add(gameCreate);
     }
 
     public boolean setFinished(){
@@ -58,6 +55,6 @@ public class Set {
     }
 
     public Game getActualGame(){
-        return actualGame;
+        return games.get(games.size() - 1);
     }
 }

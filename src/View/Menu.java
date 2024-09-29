@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
-    public static final String OPTION_NOT_VALID = "Opción no válida. Por favor, intente de nuevo.";
+    public static final String OPTION_NOT_VALID = "Invalid option.";
     public static final String TENIS_MATCH_TITLE = "::::::::: TENIS MATCH :::::::::";
-    public static final String SELECT_OPTION = "Elija la opción que desee: ";
+    public static final String SELECT_OPTION = "Select option: ";
     private final Map<Integer, MenuCommand> commands;
     private final ConsolePrint consolePrint;
 
