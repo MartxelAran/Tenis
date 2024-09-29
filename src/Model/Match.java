@@ -1,11 +1,10 @@
 package Model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Match {
+
+    private int id;
     private List<Set> sets;
     private Map<Player, Integer> wonSetsByPlayer;
     private Set actualSet;
@@ -13,6 +12,7 @@ public class Match {
     private ServeTurn serveTurn;
 
     public Match(int setNumber, List<Player> players, int id) {
+        this.id = id;
         this.sets = new ArrayList<>();
         this.wonSetsByPlayer = new HashMap<>();
         this.serveTurn = new ServeTurn(players);
@@ -68,5 +68,21 @@ public class Match {
 
     public Player getServer() {
         return serveTurn.getServer();
+    }
+
+    public Map<Player, Integer> getFinalScores() {
+        return new HashMap<>(wonSetsByPlayer);
+    }
+
+    public Optional<Player> getMatchWinner() {
+        return wonSetsByPlayer.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() >= (setNumber / 2 + 1))
+                .map(Map.Entry::getKey)
+                .findFirst();
+    }
+
+    public int getId() {
+        return id;
     }
 }

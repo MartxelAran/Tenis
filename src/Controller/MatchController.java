@@ -63,4 +63,8 @@ public class MatchController {
         matchRenderer.displayPoint(pointPlayer);
         match.playerPoint(pointPlayer);
     }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
 }

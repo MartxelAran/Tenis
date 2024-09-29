@@ -9,39 +9,55 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
+    public static final String OPTION_NOT_VALID = "Opción no válida. Por favor, intente de nuevo.";
+    public static final String TENIS_MATCH_TITLE = "::::::::: TENIS MATCH :::::::::";
+    public static final String SELECT_OPTION = "Elija la opción que desee: ";
     private final Map<Integer, MenuCommand> commands;
-    private final RefereeController refereeController;
-    private final PlayerController playerController;
-    private final MatchController matchController;
+    private final ConsolePrint consolePrint;
 
-    public Menu(){
-        this.refereeController = new RefereeController();
-        this.playerController = new PlayerController();
-        this.matchController = new MatchController(new MatchRenderer());
-        this.commands = new HashMap<>();
+    public Menu() {
+        this.consolePrint = ConsolePrint.getInstance();
+        this.commands = initializeCommands();
+    }
+
+    private Map<Integer, MenuCommand> initializeCommands() {
+        Map<Integer, MenuCommand> commands = new HashMap<>();
+        RefereeController refereeController = new RefereeController();
+        PlayerController playerController = new PlayerController();
+        MatchController matchController = new MatchController(new MatchRenderer());
+
         commands.put(1, new CreateRefereeCommand(refereeController));
         commands.put(2, new LogRefereeCommand(refereeController));
         commands.put(3, new CreatePlayerCommand(playerController));
         commands.put(4, new ReadPlayersCommand(playerController));
         commands.put(5, new CreateMatchCommand(matchController, playerController));
+        commands.put(6, new ShowMatchHistoryCommand(matchController));
+        return commands;
     }
 
-    public void createMenu(){
+    public void createMenu() {
         int option;
-        ConsolePrint consolePrint = ConsolePrint.getInstance();
-        MenuCommand chosenCommand=null;
+        MenuCommand menuCommand;
         do {
-            consolePrint.println("::::::: TENIS MATCH :::::::::");
-            consolePrint.println("Elija la opcion que desee: ");
-            commands.forEach((key, command) -> command.showCommand());
+            displayMenuOptions();
             option = consolePrint.nextInt();
             consolePrint.nextLine();
-            chosenCommand = commands.get(option);
-            if (chosenCommand != null) {
-                chosenCommand.execute();
-            } else {
-                consolePrint.println("Program ended");
-            }
-        }while(chosenCommand!=null);
+            menuCommand = commands.get(option);
+            executeCommand(menuCommand);
+        } while (menuCommand != null);
+    }
+
+    private void displayMenuOptions() {
+        consolePrint.println(TENIS_MATCH_TITLE);
+        consolePrint.println(SELECT_OPTION);
+        commands.forEach((key, command) -> command.showCommand());
+    }
+
+    private void executeCommand(MenuCommand chosenCommand) {
+        if (chosenCommand != null) {
+            chosenCommand.execute();
+        } else {
+            consolePrint.println(OPTION_NOT_VALID);
+        }
     }
 }
