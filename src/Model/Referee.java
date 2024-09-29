@@ -10,10 +10,6 @@ public class Referee {
         this.password = password;
     }
 
-    public void logReferee(){
-        
-    }
-
     public void registerReferee(String name, String password){
         this.name=name;
         this.password=password;

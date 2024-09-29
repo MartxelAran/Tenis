@@ -31,8 +31,8 @@ public class Menu {
         ConsolePrint consolePrint = ConsolePrint.getInstance();
         MenuCommand chosenCommand=null;
         do {
-
-            consolePrint.println("Que quiere hacer?");
+            consolePrint.println("::::::: TENIS MATCH :::::::::");
+            consolePrint.println("Elija la opcion que desee: ");
             commands.forEach((key, command) -> command.showCommand());
             option = consolePrint.nextInt();
             consolePrint.nextLine();

@@ -50,8 +50,7 @@ public class Set {
 
     public boolean setFinished(){
         for (Map.Entry<Player, Integer> entry : wonGamesByPlayers.entrySet()) {
-            int games = entry.getValue();
-            if (games>6){
+            if (entry.getValue()>6){
                 return true;
             }
         }

@@ -4,6 +4,7 @@ import Controller.PlayerController;
 import util.ConsolePrint;
 
 class CreatePlayerCommand implements MenuCommand {
+    public static final String CREATE_PLAYERS_OPTIONS = "3. Create players";
     private final PlayerController playerController;
     private final ConsolePrint consolePrint;
 
@@ -14,7 +15,7 @@ class CreatePlayerCommand implements MenuCommand {
 
     @Override
     public void showCommand() {
-        consolePrint.println("3. Create players");
+        consolePrint.println(CREATE_PLAYERS_OPTIONS);
     }
 
     @Override

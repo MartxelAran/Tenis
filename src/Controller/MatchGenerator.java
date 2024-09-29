@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class MatchGenerator {
-    Random rand;
+    private Random rand;
     public MatchGenerator() {
         rand = new Random();
     }

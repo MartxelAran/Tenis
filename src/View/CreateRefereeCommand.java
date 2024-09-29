@@ -24,7 +24,7 @@ public class CreateRefereeCommand implements MenuCommand {
         String nombre = consolePrint.nextLine();
         consolePrint.println("Ingrese un password");
         String password = consolePrint.nextLine();
-        Referee ref = new Referee(nombre, password);
-        refereeController.addReferee(ref);
+        Referee referee = new Referee(nombre, password);
+        refereeController.addReferee(referee);
     }
 }

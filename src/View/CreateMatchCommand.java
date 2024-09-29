@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class CreateMatchCommand implements MenuCommand {
 
+    public static final String CREATE_MATCH_OPTION = "5. Create match";
     private final MatchController matchController;
     private final ConsolePrint consolePrint;
     private final PlayerController playerController;
@@ -23,7 +24,7 @@ public class CreateMatchCommand implements MenuCommand {
 
     @Override
     public void showCommand() {
-        consolePrint.println("5. Create match");
+        consolePrint.println(CREATE_MATCH_OPTION);
     }
 
     @Override
