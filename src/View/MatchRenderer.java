@@ -1,11 +1,9 @@
 package View;
 
-import Model.Game;
 import Model.Match;
 import Model.Player;
 import Model.Set;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
 

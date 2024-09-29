@@ -1,7 +1,5 @@
 package util;
 
-import View.MessageConsole;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -57,10 +55,6 @@ public class ConsolePrint {
 
     public void println() {
         System.out.println();
-    }
-
-    public void println(MessageConsole messageOptions) {
-        System.out.println(messageOptions.getMessage());
     }
 
     public void println(String message) {
