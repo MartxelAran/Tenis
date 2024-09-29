@@ -7,8 +7,8 @@ import java.util.List;
 
 public class RefereeController {
 
-    List<Referee> referees;
-    boolean refereeLogged;
+    private List<Referee> referees;
+    private boolean refereeLogged;
 
     public RefereeController() {
         referees = new ArrayList<>();

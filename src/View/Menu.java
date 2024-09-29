@@ -3,15 +3,10 @@ package View;
 import Controller.MatchController;
 import Controller.PlayerController;
 import Controller.RefereeController;
-import Model.Match;
-import Model.Player;
-import Model.Referee;
 import util.ConsolePrint;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Menu {
     private final Map<Integer, MenuCommand> commands;
@@ -28,7 +23,7 @@ public class Menu {
         commands.put(2, new LogRefereeCommand(refereeController));
         commands.put(3, new CreatePlayerCommand(playerController));
         commands.put(4, new ReadPlayersCommand(playerController));
-        commands.put(5, new CreateMatchCommand(matchController));
+        commands.put(5, new CreateMatchCommand(matchController, playerController));
     }
 
     public void createMenu(){

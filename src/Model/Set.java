@@ -41,7 +41,7 @@ public class Set {
     }
 
     public void newGame(){
-        ArrayList<Player> players = new ArrayList<>(wonGamesByPlayers.keySet());
+        List<Player> players = new ArrayList<>(wonGamesByPlayers.keySet());
         if (isTieBreakCondition()) {
             actualGame = new TieBreak(players,serveTurn);
         } else {

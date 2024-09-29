@@ -6,14 +6,18 @@ import Model.Player;
 import util.ConsolePrint;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-public class CreateMatchCommand implements MenuCommand{
+public class CreateMatchCommand implements MenuCommand {
 
     private final MatchController matchController;
     private final ConsolePrint consolePrint;
+    private final PlayerController playerController;
 
-    public CreateMatchCommand(MatchController matchController) {
+    public CreateMatchCommand(MatchController matchController, PlayerController playerController) {
         this.matchController = matchController;
+        this.playerController = playerController;
         this.consolePrint = ConsolePrint.getInstance();
     }
 
@@ -24,18 +28,12 @@ public class CreateMatchCommand implements MenuCommand{
 
     @Override
     public void execute() {
-        ArrayList<Player> players = new ArrayList<>();
+        List<Player> players = new ArrayList<>();
 
-        consolePrint.println("Sets: ");
-        int sets = consolePrint.nextInt();
-        consolePrint.nextLine();
+        int sets = getNumberOfSets();
+        if (sets == -1) return;
 
-        if (sets != 3 && sets != 5) {
-            consolePrint.println("Error: Invalid number of sets. Must be 3 or 5.");
-            return;
-        }
-
-        if (!addPlayers(consolePrint, players)) {
+        if (!collectPlayers(players)) {
             return;
         }
 
@@ -43,21 +41,32 @@ public class CreateMatchCommand implements MenuCommand{
         matchController.startMatch(createdMatchId);
     }
 
-    private boolean addPlayers(ConsolePrint consolePrint, ArrayList<Player> players) {
+    private int getNumberOfSets() {
+        consolePrint.print("Sets (3 o 5): ");
+        int sets = consolePrint.nextInt();
+        consolePrint.nextLine();
+
+        if (sets != 3 && sets != 5) {
+            consolePrint.println("Error: Número de sets inválido. Debe ser 3 o 5.");
+            return -1;
+        }
+        return sets;
+    }
+
+    private boolean collectPlayers(List<Player> players) {
         for (int i = 0; i < 2; i++) {
-            consolePrint.print("Enter Player " + (i + 1) + " ID: ");
-            int playerToAdd = consolePrint.nextInt();
+            consolePrint.print("Ingrese el ID del Jugador " + (i + 1) + ": ");
+            int playerId = consolePrint.nextInt();
             consolePrint.nextLine();
 
-            Player p = PlayerController.getPlayerById(playerToAdd);
-            if (p == null) {
-                consolePrint.println("Error: Player with ID " + playerToAdd + " not found.");
+            Optional<Player> playerOptional = playerController.getPlayerById(playerId);
+            if (Boolean.FALSE.equals(playerOptional.isPresent())) {
+                consolePrint.println("Error: Jugador con ID " + playerId + " no encontrado.");
                 return false;
+            }else{
+                players.add(playerOptional.get());
             }
-
-            players.add(p);
         }
-
         return true;
     }
 }

@@ -28,14 +28,14 @@ public class MatchController {
                 matchRenderer.displayPoint(pointPlayer);
                 matches.get(matchId-1).playerPoint(pointPlayer);
                 Thread.sleep(1000);
-            } catch (Exception e) {
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }while(!actualMatch.hasFinished());
         matchRenderer.showMatch(matches.get(matchId-1));
     }
 
-    public int addMatch(int sets, ArrayList<Player> players) {
+    public int addMatch(int sets, List<Player> players) {
         actualMatch=new Match(sets, players, matches.size()+1);
         matches.add(actualMatch);
         return matches.size();

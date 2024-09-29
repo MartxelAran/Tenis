@@ -4,9 +4,10 @@ import Model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PlayerController {
-    static List<Player> players;
+    private List<Player> players;
 
     public PlayerController(){
         players = new ArrayList<>();
@@ -26,9 +27,9 @@ public class PlayerController {
                 findFirst().orElse(null);
     }
 
-    public static Player getPlayerById(int id){
+    public Optional<Player> getPlayerById(int id){
         return players.stream().
                 filter(p->p.getId()==id).
-                findFirst().orElse(null);
+                findFirst();
     }
 }
