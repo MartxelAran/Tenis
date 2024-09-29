@@ -49,4 +49,8 @@ public class MatchRenderer {
         }
         consolePrint.println();
     }
+
+    public void showError(String error) {
+        consolePrint.println(error);
+    }
 }

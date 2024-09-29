@@ -20,8 +20,4 @@ public class ServeTurn {
     public Player getServer() {
         return server;
     }
-
-    public Player getReceiver() {
-        return receiver;
-    }
 }
