@@ -4,8 +4,8 @@ import java.util.List;
 
 public class TieBreak extends Game {
 
-    public TieBreak(List<Player> players, ServeTurn serveTurn) {
-        super(players, serveTurn);
+    public TieBreak(List<Player> players ) {
+        super(players);
         setPointsToWin(6);
     }
 

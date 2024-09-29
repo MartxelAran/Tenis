@@ -4,8 +4,8 @@ import java.util.List;
 
 public class StandardGame extends Game {
 
-    public StandardGame(List<Player> players, ServeTurn serveTurn) {
-        super(players, serveTurn);
+    public StandardGame(List<Player> players) {
+        super(players);
         setPointsToWin(3);
     }
 

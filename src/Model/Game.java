@@ -7,12 +7,10 @@ import java.util.Map;
 public abstract class Game {
     protected Map<Player, Integer> wonPointsByPlayers;
     protected int pointsToWin;
-    protected ServeTurn serveTurn;
-    protected Game(List<Player> players, ServeTurn serveTurn) {
+    protected Game(List<Player> players) {
         wonPointsByPlayers = new HashMap<>();
         wonPointsByPlayers.put(players.get(0),0);
         wonPointsByPlayers.put(players.get(1),0);
-        this.serveTurn = serveTurn;
     }
 
     public void playerPoint(Player player){
