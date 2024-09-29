@@ -17,13 +17,13 @@ public enum Points {
         return value;
     }
 
-    public int getPoints() {
+    public String getPoints() {
         return switch (this) {
-            case FIFTEEN -> 15;
-            case THIRTY -> 30;
-            case FORTY -> 40;
-            case ADVANTAGE -> 50;
-            default -> 0;
+            case FIFTEEN -> "15";
+            case THIRTY -> "30";
+            case FORTY -> "40";
+            case ADVANTAGE -> "AD";
+            default -> "0";
         };
     }
 

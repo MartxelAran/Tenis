@@ -11,13 +11,16 @@ public class Match{
     Set actualSet;
     long date;
     int setNumber;
+    ServeTurn serveTurn;
 
     public Match(int setNumber, ArrayList<Player> players, int id) {
         this.sets = new ArrayList<>();
+        this.wonSetsByPlayer = new HashMap<>();
+        this.serveTurn = new ServeTurn(players);
+        this.actualSet = new Set(players,serveTurn);
+
         this.id = id;
         this.date = System.currentTimeMillis();
-        this.wonSetsByPlayer = new HashMap<>();
-        this.actualSet = new Set(players);
         this.sets.add(actualSet);
         this.wonSetsByPlayer.put(players.get(0), 0);
         this.wonSetsByPlayer.put(players.get(1), 0);
@@ -38,7 +41,7 @@ public class Match{
 
     public void newSet(){
         ArrayList<Player> players = new ArrayList<>(wonSetsByPlayer.keySet());
-        actualSet=new Set(players);
+        actualSet=new Set(players,serveTurn);
         sets.add(actualSet);
     }
 
@@ -65,7 +68,11 @@ public class Match{
         return setNumber;
     }
 
-    public int getPointsByPlayer(Player player){
+    public String getPointsByPlayer(Player player){
         return actualSet.getActualGame().getActualGamePointsByPlayer(player);
+    }
+
+    public Player getServer(){
+        return serveTurn.getServer();
     }
 }

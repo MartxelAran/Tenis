@@ -30,8 +30,8 @@ public class CreateMatchCommand implements MenuCommand{
         int sets = consolePrint.nextInt();
         consolePrint.nextLine();
 
-        if (sets != 1 && sets != 3 && sets != 5) {
-            consolePrint.println("Error: Invalid number of sets. Must be 1, 3, or 5.");
+        if (sets != 3 && sets != 5) {
+            consolePrint.println("Error: Invalid number of sets. Must be 3 or 5.");
             return;
         }
 

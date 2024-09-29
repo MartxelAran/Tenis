@@ -19,8 +19,13 @@ class CreatePlayerCommand implements MenuCommand {
 
     @Override
     public void execute() {
-        consolePrint.println("Ingrese un nombre");
-        String nombre = consolePrint.nextLine();
-        playerController.addPlayer(nombre);
+        String nombre;
+        do{
+            consolePrint.println("Name of the player (enter to end creating players): ");
+            nombre = consolePrint.nextLine();
+            if(!nombre.isEmpty()){
+                playerController.addPlayer(nombre);
+            }
+        }while (!nombre.isEmpty());
     }
 }

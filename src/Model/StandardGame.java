@@ -5,17 +5,18 @@ import java.util.Map;
 
 public class StandardGame extends GameType{
 
-    public StandardGame(ArrayList<Player> players) {
-        super(players);
+    public StandardGame(ArrayList<Player> players, ServeTurn serveTurn) {
+        super(players, serveTurn);
+        setPointsToWin(3);
     }
 
     @Override
     public void playerPoint(Player player) {
         int currentPoints = wonPointsByPlayers.getOrDefault(player, 0);
-        if (currentPoints == 3) {
+        Player opponent = getOpponent(player);
+        if (currentPoints == 3 && wonPointsByPlayers.get(opponent) == 3) {
             wonPointsByPlayers.put(player, 4);
-        } else if (currentPoints == 4) {
-            Player opponent = getOpponent(player);
+        } else if (currentPoints == 3 && wonPointsByPlayers.get(opponent) == 4) {
             wonPointsByPlayers.put(opponent, Math.max(wonPointsByPlayers.get(opponent) - 1, 0));
         } else {
             super.playerPoint(player);
@@ -23,18 +24,12 @@ public class StandardGame extends GameType{
     }
 
     @Override
-    public boolean gameFinished() {
-        for (Map.Entry<Player, Integer> entry : wonPointsByPlayers.entrySet()) {
-            int points = entry.getValue();
-            if (points>3){
-                return true;
-            }
-        }
-        return false;
+    public boolean shouldSwitchServer() {
+        return gameFinished();
     }
 
     @Override
-    public int getActualGamePointsByPlayer(Player player) {
+    public String getActualGamePointsByPlayer(Player player) {
         return Points.getPoints(wonPointsByPlayers.get(player)).getPoints();
     }
 }

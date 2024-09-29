@@ -23,10 +23,10 @@ public class MatchController {
         do{
             try {
                 matchRenderer.showMatch(matches.get(matchId-1));
-                int idPointPlayer = matchGenerator.generatePointWinner(actualMatch.getPlayers());
-                Player p= PlayerController.getPlayerById(idPointPlayer);
-                matches.get(matchId-1).playerPoint(p);
-                //Thread.sleep(500);
+                Player pointPlayer = matchGenerator.generatePointWinner(actualMatch.getPlayers());
+                matchRenderer.displayPoint(pointPlayer);
+                matches.get(matchId-1).playerPoint(pointPlayer);
+                Thread.sleep(1000);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

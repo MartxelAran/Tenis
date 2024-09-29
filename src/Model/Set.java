@@ -8,10 +8,12 @@ public class Set {
     public ArrayList<GameType> games;
     public Map<Player, Integer> wonGamesByPlayers;
     public GameType actualGame;
+    ServeTurn serveTurn;
 
-    public Set(ArrayList<Player> players){
+    public Set(ArrayList<Player> players, ServeTurn serveTurn){
         games = new ArrayList<>();
-        actualGame=new StandardGame(players);
+        actualGame=new StandardGame(players, serveTurn);
+        this.serveTurn=serveTurn;
         games.add(actualGame);
         wonGamesByPlayers = new HashMap<Player, Integer>();
         wonGamesByPlayers.put(players.get(0), 0);
@@ -24,6 +26,9 @@ public class Set {
 
     public void playerPoint(Player player){
         actualGame.playerPoint(player);
+        if(actualGame.shouldSwitchServer()){
+            serveTurn.switchTurn();
+        }
         if(actualGame.gameFinished()){
             playerGame(player);
         }
@@ -37,9 +42,9 @@ public class Set {
     public void newGame(){
         ArrayList<Player> players = new ArrayList<>(wonGamesByPlayers.keySet());
         if (isTieBreakCondition()) {
-            actualGame = new TieBreak(players);  // Crear TieBreakGame si se cumple la condición
+            actualGame = new TieBreak(players,serveTurn);
         } else {
-            actualGame = new StandardGame(players);  // Crear StandardGame en caso contrario
+            actualGame = new StandardGame(players,serveTurn);
         }
         games.add(actualGame);
     }

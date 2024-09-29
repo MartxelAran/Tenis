@@ -11,8 +11,8 @@ public class MatchGenerator {
         rand = new Random();
     }
 
-    public int generatePointWinner(ArrayList<Player> players){
+    public Player generatePointWinner(ArrayList<Player> players){
         int randomIndex = rand.nextInt(players.size());
-        return players.get(randomIndex).getId();
+        return players.get(randomIndex);
     }
 }
