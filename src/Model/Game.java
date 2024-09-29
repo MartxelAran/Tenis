@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class Game {
-    public Map<Player, Integer> wonPointsByPlayers;
-    int pointsToWin;
-    ServeTurn serveTurn;
-
+    protected Map<Player, Integer> wonPointsByPlayers;
+    protected int pointsToWin;
+    protected ServeTurn serveTurn;
     protected Game(List<Player> players, ServeTurn serveTurn) {
         wonPointsByPlayers = new HashMap<>();
         wonPointsByPlayers.put(players.get(0),0);
