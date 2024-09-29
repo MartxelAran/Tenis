@@ -2,7 +2,7 @@ package util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsolePrint {
@@ -77,7 +77,7 @@ public class ConsolePrint {
         System.out.println("FORMAT ERROR! " + "Enter a " + format + " formatted value.");
     }
 
-    public <T> void println(ArrayList<T> players) {
+    public <T> void println(List<T> players) {
         for (T player : players) {
             System.out.println(player.toString());
         }

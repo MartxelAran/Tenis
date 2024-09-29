@@ -1,14 +1,12 @@
 package Model;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 public class ServeTurn {
     private Player server;
     private Player receiver;
 
-    public ServeTurn(ArrayList<Player> players) {
+    public ServeTurn(List<Player> players) {
         this.server = players.get(0);
         this.receiver = players.get(1);
     }

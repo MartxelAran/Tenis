@@ -2,18 +2,19 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Match{
-    int id;
-    ArrayList<Set> sets;
-    Map<Player,Integer> wonSetsByPlayer;
-    Set actualSet;
-    long date;
-    int setNumber;
-    ServeTurn serveTurn;
+    private int id;
+    private List<Set> sets;
+    private Map<Player,Integer> wonSetsByPlayer;
+    private Set actualSet;
+    private long date;
+    private int setNumber;
+    private ServeTurn serveTurn;
 
-    public Match(int setNumber, ArrayList<Player> players, int id) {
+    public Match(int setNumber, List<Player> players, int id) {
         this.sets = new ArrayList<>();
         this.wonSetsByPlayer = new HashMap<>();
         this.serveTurn = new ServeTurn(players);
@@ -40,7 +41,7 @@ public class Match{
     }
 
     public void newSet(){
-        ArrayList<Player> players = new ArrayList<>(wonSetsByPlayer.keySet());
+        List<Player> players = new ArrayList<>(wonSetsByPlayer.keySet());
         actualSet=new Set(players,serveTurn);
         sets.add(actualSet);
     }
@@ -55,12 +56,11 @@ public class Match{
         return false;
     }
 
-    public ArrayList<Player> getPlayers(){
-        ArrayList<Player> players = new ArrayList<>(wonSetsByPlayer.keySet());
-        return players;
+    public List<Player> getPlayers(){
+        return new ArrayList<>(wonSetsByPlayer.keySet());
     }
 
-    public ArrayList<Set> getSets(){
+    public List<Set> getSets(){
         return sets;
     }
 

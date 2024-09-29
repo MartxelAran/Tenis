@@ -6,13 +6,14 @@ import Model.Set;
 import util.ConsolePrint;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class MatchRenderer {
 
     private Map<Player, Integer> wonGamesByPlayers;
-    private ArrayList<Set> sets;
-    private ArrayList<Player> players;
+    private List<Set> sets;
+    private List<Player> players;
     private ConsolePrint consolePrint;
 
     public MatchRenderer() {

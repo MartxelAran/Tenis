@@ -5,10 +5,11 @@ import Model.Player;
 import View.MatchRenderer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MatchController {
 
-    private final ArrayList<Match> matches;
+    private final List<Match> matches;
     private final MatchRenderer matchRenderer;
     private final MatchGenerator matchGenerator;
     private Match actualMatch;

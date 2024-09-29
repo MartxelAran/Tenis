@@ -1,11 +1,12 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class StandardGame extends GameType{
 
-    public StandardGame(ArrayList<Player> players, ServeTurn serveTurn) {
+    public StandardGame(List<Player> players, ServeTurn serveTurn) {
         super(players, serveTurn);
         setPointsToWin(3);
     }

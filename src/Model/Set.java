@@ -2,20 +2,21 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Set {
-    public ArrayList<GameType> games;
-    public Map<Player, Integer> wonGamesByPlayers;
-    public GameType actualGame;
-    ServeTurn serveTurn;
+    private List<GameType> games;
+    private Map<Player, Integer> wonGamesByPlayers;
+    private GameType actualGame;
+    private ServeTurn serveTurn;
 
-    public Set(ArrayList<Player> players, ServeTurn serveTurn){
+    public Set(List<Player> players, ServeTurn serveTurn){
         games = new ArrayList<>();
         actualGame=new StandardGame(players, serveTurn);
         this.serveTurn=serveTurn;
         games.add(actualGame);
-        wonGamesByPlayers = new HashMap<Player, Integer>();
+        wonGamesByPlayers = new HashMap<>();
         wonGamesByPlayers.put(players.get(0), 0);
         wonGamesByPlayers.put(players.get(1), 0);
     }
@@ -61,7 +62,6 @@ public class Set {
                 return true;
             }
         }
-
         return false;
     }
 

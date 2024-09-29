@@ -3,9 +3,10 @@ package Controller;
 import Model.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerController {
-    static ArrayList<Player> players;
+    static List<Player> players;
 
     public PlayerController(){
         players = new ArrayList<>();
@@ -15,7 +16,7 @@ public class PlayerController {
         this.players.add(new Player(players.size()+1,name));
     }
 
-    public ArrayList<Player> getPlayers(){
+    public List<Player> getPlayers(){
         return this.players;
     }
 

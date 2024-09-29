@@ -1,7 +1,7 @@
 package Model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class GameType {
@@ -9,7 +9,7 @@ public abstract class GameType {
     int pointsToWin;
     ServeTurn serveTurn;
 
-    public GameType(ArrayList<Player> players, ServeTurn serveTurn) {
+    protected GameType(List<Player> players, ServeTurn serveTurn) {
         wonPointsByPlayers = new HashMap<>();
         wonPointsByPlayers.put(players.get(0),0);
         wonPointsByPlayers.put(players.get(1),0);

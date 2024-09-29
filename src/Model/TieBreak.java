@@ -1,10 +1,10 @@
 package Model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TieBreak extends GameType{
 
-    public TieBreak(ArrayList<Player> players, ServeTurn serveTurn) {
+    public TieBreak(List<Player> players, ServeTurn serveTurn) {
         super(players, serveTurn);
         setPointsToWin(6);
     }

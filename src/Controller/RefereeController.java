@@ -3,10 +3,11 @@ package Controller;
 import Model.Referee;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RefereeController {
 
-    ArrayList<Referee> referees;
+    List<Referee> referees;
     boolean refereeLogged;
 
     public RefereeController() {
@@ -18,7 +19,7 @@ public class RefereeController {
         referees.add(ref);
     }
 
-    public ArrayList<Referee> getReferees() {
+    public List<Referee> getReferees() {
         return this.referees;
     }
 
