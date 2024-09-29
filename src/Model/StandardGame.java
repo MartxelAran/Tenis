@@ -12,13 +12,24 @@ public class StandardGame extends Game {
     @Override
     public void playerPoint(Player player) {
         int currentPoints = wonPointsByPlayers.getOrDefault(player, 0);
-        Player opponent = getOpponent(player);
-        if (currentPoints == 3 && wonPointsByPlayers.get(opponent) == 3) {
-            wonPointsByPlayers.put(player, 4);
-        } else if (currentPoints == 3 && wonPointsByPlayers.get(opponent) == 4) {
-            wonPointsByPlayers.put(opponent, Math.max(wonPointsByPlayers.get(opponent) - 1, 0));
+        int opponentPoints = wonPointsByPlayers.getOrDefault(getOpponent(player), 0);
+
+        if (isDeuce(currentPoints, opponentPoints)) {
+            handleDeuce(player, opponentPoints);
         } else {
             super.playerPoint(player);
+        }
+    }
+
+    private boolean isDeuce(int playerPoints, int opponentPoints) {
+        return playerPoints == 3 && opponentPoints >= 3;
+    }
+
+    private void handleDeuce(Player player, int opponentPoints) {
+        if (opponentPoints == 3) {
+            wonPointsByPlayers.put(player, 4);
+        } else if (opponentPoints == 4) {
+            wonPointsByPlayers.put(getOpponent(player), Math.max(opponentPoints - 1, 0));
         }
     }
 

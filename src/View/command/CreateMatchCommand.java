@@ -1,4 +1,4 @@
-package View;
+package View.command;
 
 import Controller.MatchController;
 import Controller.PlayerController;
@@ -47,7 +47,7 @@ public class CreateMatchCommand implements MenuCommand {
         consolePrint.nextLine();
 
         if (sets != 3 && sets != 5) {
-            consolePrint.println("Error: Número de sets inválido. Debe ser 3 o 5.");
+            consolePrint.println("Error: Invalid number of sets. It must be 3 or 5.");
             return -1;
         }
         return sets;
@@ -56,13 +56,13 @@ public class CreateMatchCommand implements MenuCommand {
     private List<Player> collectPlayers() {
         List<Player> players = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
-            consolePrint.print("Ingrese el ID del Jugador " + (i + 1) + ": ");
+            consolePrint.print("Enter player ID " + (i + 1) + ": ");
             int playerId = consolePrint.nextInt();
             consolePrint.nextLine();
 
             Optional<Player> playerOptional = playerController.getPlayerById(playerId);
             if (Boolean.FALSE.equals(playerOptional.isPresent())) {
-                consolePrint.println("Error: Jugador con ID " + playerId + " no encontrado.");
+                consolePrint.println("Error: player with ID " + playerId + " not found.");
                 return new ArrayList<>();
             }else{
                 players.add(playerOptional.get());

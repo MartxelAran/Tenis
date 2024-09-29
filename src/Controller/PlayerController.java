@@ -21,12 +21,6 @@ public class PlayerController {
         return this.players;
     }
 
-    public Player getPlayerByName(String name){
-        return this.players.stream().
-                filter(p -> p.getName().equals(name)).
-                findFirst().orElse(null);
-    }
-
     public Optional<Player> getPlayerById(int id){
         return players.stream().
                 filter(p->p.getId()==id).

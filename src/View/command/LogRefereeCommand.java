@@ -1,9 +1,9 @@
-package View;
+package View.command;
 
 import Controller.RefereeController;
 import util.ConsolePrint;
 
-class LogRefereeCommand implements MenuCommand {
+public class LogRefereeCommand implements MenuCommand {
     private final RefereeController refereeController;
     private final ConsolePrint consolePrint;
 
@@ -19,9 +19,9 @@ class LogRefereeCommand implements MenuCommand {
 
     @Override
     public void execute() {
-        consolePrint.println("Ingrese un nombre");
+        consolePrint.println("Enter a name");
         String nombre = consolePrint.nextLine();
-        consolePrint.println("Ingrese un password");
+        consolePrint.println("Enter a password");
         String password = consolePrint.nextLine();
         if (refereeController.checkRefereeCredentials(nombre, password)) {
             consolePrint.println("Referee logged!");

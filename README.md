@@ -1,18 +1,27 @@
-## Getting Started
+## IWVG: Trabajo práctico: DOO
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+# Proyecto de Tenis
 
-## Folder Structure
+En el presente proyecto se aplica todo lo aprendido en clase.
 
-The workspace contains two folders by default, where:
+### Autores
+Alvaro Fernando Chavez Chavez 
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Martxel Aranzadi Olazabal
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Diagrama de Dominio
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+![Diagrama de Dominio](./docs/diagrams/domainmodel/tenis_domain-model.png)
 
-## Dependency Management
+## Diagrama de Paquetes
+![Diagrama de Clases](./docs/diagrams/packagediagram/package-diagram.png)
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Diagrama de clases
+
+![Diagrama de Clases](./docs/diagrams/classdiagram/tenis_diagram_class.png)
+
+
+## Auto evaluación
+
+Hemos implementado varias cosas dadas en clase como la abstracción y la herencia además de la división de métodos y clases
+utilizando lo aprendido en clase.

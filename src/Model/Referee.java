@@ -2,17 +2,12 @@ package Model;
 
 public class Referee {
 
-    public String name;
-    public String password;
+    private String name;
+    private String password;
 
     public Referee(String name, String password) {
         this.name = name;
         this.password = password;
-    }
-
-    public void registerReferee(String name, String password){
-        this.name=name;
-        this.password=password;
     }
 
     public String getName() {

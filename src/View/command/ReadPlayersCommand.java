@@ -1,4 +1,4 @@
-package View;
+package View.command;
 
 import Controller.PlayerController;
 import util.ConsolePrint;
